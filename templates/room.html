@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block title %} Survey-Form {% endblock %}
+
+{% block content %}
+<h1>{{ room.FormName }}</h1>
+<form id="survey-form" method="post">
+  {% csrf_token %}
+  {% for question in questions %}
+  <h2>{{ question.question }}</h2>
+  {% for option in question.options %}
+  <input type="radio" name="q{{ question.uid }}" value="{{ option.uid }}" required>
+  <label style="font-size:larger ">{{ option.option }}</label><br>
+  {% endfor %}
+  {% endfor %}
+  <br>
+  <button type="submit" id="submit-btn">Submit</button>
+</form>
+
+<script>
+  // Get the form element
+  const surveyForm = document.querySelector('#survey-form');
+
+  // Get the submit button
+  const submitBtn = document.querySelector('#submit-btn');
+
+  // Add a click event listener to the submit button
+  submitBtn.addEventListener('click', () => {
+    // Get all the radio inputs in the form
+    const radioInputs = surveyForm.querySelectorAll('input[type="radio"]');
+    let isAllAnswered = true;
+
+    // Check if all the radio inputs have been checked
+    radioInputs.forEach(input => {
+      if (!input.checked) {
+        isAllAnswered = false;
+      }
+    });
+
+    // If all the questions have been answered, submit the form
+    if (isAllAnswered) {
+      surveyForm.submit();
+    } else {
+      alert('Please answer all the questions before submitting the form!');
+    }
+  });
+</script>
+{% endblock %}

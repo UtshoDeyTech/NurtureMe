@@ -1,0 +1,161 @@
+{% extends 'base.html' %}
+{% block title %} Feedback {% endblock %}
+{% block content %}
+<div id="container">
+    <div class="questionnaire">
+      <h2>Feedback form for 'NurtureMe' carbon footprint calculator:</h2>
+      <ol>
+        <li>Why did you start using the 'NurtureMe' carbon footprint calculator?</li>
+        <li>How was your experience like using the calculator?</li>
+        <li>How useful is the product to you?</li>
+        <li>Rate the application depending on how much user-friendly the product interface has been to you.</li>
+        <li>How would you describe the application in three words?</li>
+        <li>How likely are you to recommend the application to friends and colleagues considering that you have used the
+          application elaborately?</li>
+        <li>If you were to review the application, what score would you give out of 20?</li>
+        <li>What do you think is the most annoying sides of the application?</li>
+        <li>Does the designing of the application look appealing to you?</li>
+        <li>Are you satisfied with the overall performance and answers the application provides at the end of the
+          questions being asked?</li>
+        <li>How often do you use the application?</li>
+      </ol>
+    </div>
+  
+    <form action="" method="post" class="message-form">
+      {% csrf_token %}
+      <label for="message" class="message-label">{{username}}, please evaluate something about this project...</label>
+      <textarea id="message" name="message" rows="6" cols="100" class="message-box"></textarea>
+      <br>
+      <input type="submit" value="Submit" class="submit-button">
+    </form>
+  
+    {% if messages %}
+    <div class="alert" role="alert">
+      <button type="button" class="close-button">&times;</button>
+      {% for message in messages %}
+      <p>{{ message }}</p>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+
+
+  <style>
+    #container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: #ded191;
+        margin-top: 10px;
+      }
+    
+      .questionnaire {
+        background-color: #f7f7f7;
+        padding: 20px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+      }
+
+      .questionnaire h2 {
+        color: #006666;
+        font-size: 24px;
+        margin-bottom: 10px;
+      }
+
+      .questionnaire ol {
+        list-style: none;
+        padding-left: 0;
+        margin-top: 20px;
+      }
+
+      .questionnaire li {
+        font-size: 18px;
+        margin-bottom: 10px;
+      }
+
+      .questionnaire li:nth-child(odd) {
+        background-color: #e7e7e7;
+        padding: 10px;
+        border-radius: 5px;
+      }
+
+      .questionnaire li:nth-child(even) {
+        background-color: #d7d7d7;
+        padding: 10px;
+        border-radius: 5px;
+      }
+
+      .message-form {
+        margin: 20px auto;
+        width: 80%;
+        max-width: 600px;
+        background-color: #f2f2f2;
+        border: 2px solid #ccc;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0px 2px 5px #aaa;
+        margin-bottom: 20px;
+      }
+
+      .message-label {
+        display: block;
+        margin-bottom: 10px;
+        font-size: 20px;
+        font-weight: bold;
+      }
+
+      .message-box {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        resize: none;
+      }
+
+      .submit-button {
+        display: inline-block;
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .submit-button:hover {
+        background-color: #3e8e41;
+      }
+
+      .alert {
+        position: relative;
+        padding: 10px;
+        margin-bottom: 10px;
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 1px solid #d4edda;
+      }
+
+      .close-button {
+        position: absolute;
+        top: 5px;
+        right: 10px;
+        font-size: 20px;
+        font-weight: bold;
+        color: #721c24;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+      }
+
+      .close-button:hover {
+        color: #fff;
+        background-color: #dc3545;
+      }
+</style>
+
+
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %} Home {% endblock %}
+
+{% block content %}
+
+  {% if messages %}
+  <div style="margin-top: 1rem; background-color: #e4fd8a; border-radius: 0.5rem; padding: 1rem;">
+    <ul style="list-style-type: disc; margin-left: 2rem;">
+      {% for message in messages %}
+      <li style="color: #805AD5;"><h2>{{ message }}</h2></li>
+      <hr>
+      {% endfor %}
+      
+    </ul>
+  </div>
+  {% endif %}
+
+  <div style="max-width: 60rem; margin: auto; background-color: white; border-radius: 0.5rem; box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);">
+    <div id="accordion-flush" data-accordion="collapse">
+
+      {% for question in homeQuestions %}
+      <div id="accordion-flush-body-{{question.id}}" style="padding: 1rem; border-bottom: 1px solid #E5E7EB;">
+        <h1 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem; color: #20bf6b;">{{question.question}}</h1>
+        <h3 style="margin-bottom: 0.5rem; color: #016c25;">{{question.answer}}</h3>
+      </div>
+      {% endfor %}
+
+    </div>
+  </div>
+
+  {% if notes %}
+  <div style="margin-top: 1rem; background-color: #F3D9FA; border-radius: 0.5rem; padding: 1rem;">
+    {% for note in notes %}
+    <p style="margin-bottom: 0.5rem; color: #6B46C1;">{{ note.Suggestion }}</p>
+    <hr style="border-top: 1px solid #9F7AEA;">
+    {% endfor %}
+  </div>
+  {% endif %}
+{% endblock %}

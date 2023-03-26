@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %} Form {% endblock%}
+{% block content %}
+
+<div>
+    <form method="post">
+        {% csrf_token %}
+        {% for question in questions %}
+            <h2>{{ question.question }}</h2>
+            {% for option in question.options %}
+                <input type="radio" name="q{{ question.id }}" value="{{ option.id }}">
+                <label>{{ option.option }}</label><br>
+            {% endfor %}
+            <p class="text-danger">{{ question.options.0.note }}</p>
+        {% endfor %}
+        <input type="submit" value="Submit">
+    </form>
+</div>
+
+{% endblock%}

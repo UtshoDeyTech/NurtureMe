@@ -1,0 +1,106 @@
+<header style="background-color: #F9FAFB; box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1); padding: 1rem;">
+
+  <div>
+    <ul class="menu flex items-center">
+      <li class="logo">
+        <img src="https://xeero.io/wp-content/uploads/2022/05/Group-443.png" alt="Logo" style="max-height: 4rem;">
+      </li>
+      <li><a href="{% url 'home'%}"
+          style="color: #4B5563; font-size: 1.125rem; font-weight: 500; margin-right: 1.5rem;">Home</a></li>
+      <li>
+        <form style="display: flex; align-items: center;">
+          <label for="dropdown"
+            style="color: #4B5563; font-size: 1.125rem; font-weight: 500; margin-right: 1.5rem;">Survey Form:</label>
+          <div class="relative">
+            <select
+              onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);"
+              style="color: #4B5563; font-size: 1.125rem; font-weight: 500; margin-right: 1.5rem; padding: 0.5rem;">
+              <option value="">Select Form</option>
+              {% for room in rooms %}
+              <option value="{% url 'room' room.uid %}">{{ room.FormName }}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </form>
+      </li>
+      <li><a href="{% url 'survey'%}"
+          style="color: #4B5563; font-size: 1.125rem; font-weight: 500; margin-right: 1.5rem;">Feedback</a>
+      </li>
+      {% if user.is_authenticated %}
+      <li style="float: right;"><a href="{% url 'logout' %}"
+          style="color: #4B5563; font-size: 1.125rem; font-weight: 500; margin-right: 1.5rem;">Logout</a></li>
+      {% else %}
+      <li style="float: right;"><a href="{% url 'login' %}"
+          style="color: #4B5563; font-size: 1.125rem; font-weight: 500; margin-right: 1.5rem;">Login</a></li>
+      {% endif %}
+      <li>
+        <h1 style="color: #20bf6b">Welcome {{username}}!</h1>
+      </li>
+
+      <li>
+        {% if mark > 0 %}
+        <div class="score" style="border: 1px solid black; padding: 10px; background-color: #f2f2f2; transition: background-color 0.3s;">
+          <h2>Score: {{ mark }}%</h2>
+        </div>
+        {% endif %}
+      </li>
+    </ul>
+  </div>
+
+  <style>
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #F9FAFB;
+      box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+      padding: 1rem;
+    }
+
+    .menu {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .menu li {
+      margin-right: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .menu li:last-child {
+      margin-right: 0;
+    }
+
+    /* Add styles to create a hover effect on the box */
+    .score:hover {
+      background-color: #20bf6b !important;
+    }
+
+    /* Media queries for medium and small devices */
+    @media only screen and (max-width: 992px) {
+      .menu li {
+        margin-right: 0;
+        margin-bottom: 0.5rem;
+      }
+    }
+
+    @media only screen and (max-width: 576px) {
+      .menu li {
+        display: block;
+        margin-bottom: 1rem;
+      }
+
+      .menu li:last-child {
+        margin-bottom: 0;
+      }
+
+      .score {
+        margin-top: 1rem;
+      }
+    }
+  </style>
+</header>
